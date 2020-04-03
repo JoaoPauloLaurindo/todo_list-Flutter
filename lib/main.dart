@@ -25,10 +25,6 @@ class HomePage extends StatefulWidget {
 
   HomePage() {
     items = [];
-
-    // items.add(Item(title: "Item 1", done: false));
-    // items.add(Item(title: "Item 2", done: false));
-    // items.add(Item(title: "Item 3", done: true));
   }
 
   @override
@@ -86,6 +82,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white10,
         title: TextFormField(
           controller: newTaskCtrl,
           keyboardType: TextInputType.text,
@@ -95,6 +92,12 @@ class _HomePageState extends State<HomePage> {
             labelStyle: TextStyle(color: Colors.white),
           ),
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: add,
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: widget.items.length,
@@ -115,9 +118,22 @@ class _HomePageState extends State<HomePage> {
             ),
             background: Container(
               color: Colors.red.withOpacity(0.8),
-              child: Icon(
-                Icons.block,
-                color: Colors.white,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Icon(
+                    Icons.block,
+                    color: Colors.white,
+                  ),
+                  Text(
+                    "Excluir",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
               ),
             ),
             onDismissed: (direction) {
@@ -125,14 +141,6 @@ class _HomePageState extends State<HomePage> {
             },
           );
         },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: add,
-        child: Icon(
-          Icons.add,
-          color: Colors.blue,
-        ),
-        backgroundColor: Colors.white,
       ),
     );
   }
